@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "terminology": {
+      "terms": [
+        "msguru",
+        "TODO",
+        "TODOs"
+      ]
+    }
+  }
+}

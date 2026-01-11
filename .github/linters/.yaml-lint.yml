@@ -1,0 +1,14 @@
+extends: default
+
+rules:
+  # 140 chars should be enough, but don't fail if a line is longer
+  line-length:
+    max: 140
+    level: warning
+
+  truthy:
+    allowed-values: ["true", "false", "On", "Off", "on", "off"]
+    level: warning
+
+  # don't bother me with this rule
+  document-start: disable

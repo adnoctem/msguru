@@ -1,4 +1,4 @@
-# ✅ TODOs - `msguru`
+# ✅ `msguru`
 
 ## ➕ Additions
 

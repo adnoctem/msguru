@@ -4,7 +4,7 @@
 # MD013/line-length : Line length : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md013.md
 MD013:
   # Number of characters
-  line_length: 240
+  line_length: 320
   # Number of characters for headings
   heading_line_length: 300
   # Number of characters for code blocks
@@ -19,7 +19,7 @@ MD013:
 # MD033/no-inline-html : Inline HTML : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md033.md
 MD033:
   # Allowed elements
-  allowed_elements: ["img", "a", "div"]
+  allowed_elements: ["img", "a", "div", "p", "picture", "source", "br", "h1"]
 
 # MD034/no-bare-urls : Bare URL used : https://github.com/DavidAnson/markdownlint/blob/v0.34.0/doc/md034.md
 # NOTE: disabled because the tables in the READMEs might contain chart values which are bare URLs
@@ -29,3 +29,6 @@ MD034: false
 MD036:
   # Punctuation characters
   punctuation: ".,;:!?。，；：！？"
+
+# MD041/first-line-heading : First line in file should be a top-level heading :
+MD041: false
