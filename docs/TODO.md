@@ -17,3 +17,11 @@
 ### General
 
 - [Learn X in Y: C#](https://learnxinyminutes.com/csharp/)
+
+### 📦 Repositories
+
+- [GitHub: belav/csharpier](https://github.com/belav/csharpier)
+- [GitHub: chkr1011/mqttMultimeter](https://github.com/chkr1011/mqttMultimeter)
+- [GitHub: sourcegit-scm/sourcegit](https://github.com/sourcegit-scm/sourcegit)
+- [GitHub: adel-bakhshi/CrossPlatformDownloadManager](https://github.com/adel-bakhshi/CrossPlatformDownloadManager)
+- [GitHub: git-ecosystem/git-credential-manager](https://github.com/git-ecosystem/git-credential-manager)
