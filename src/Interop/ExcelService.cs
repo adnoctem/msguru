@@ -36,7 +36,7 @@ public class ExcelService : IOfficeService
                 {
                     Visible = false,
                     DisplayAlerts = false,
-                    ScreenUpdating = false
+                    ScreenUpdating = false,
                 };
             }
         }
@@ -91,8 +91,12 @@ public class ExcelService : IOfficeService
                 Title = workbook.Title,
                 Subject = workbook.Subject,
                 LastSavedBy = props["Last Author"].Value?.ToString() ?? string.Empty,
-                Created = props["Creation Date"].Value is DateTime created ? created : DateTime.MinValue,
-                Modified = props["Last Save Time"].Value is DateTime modified ? modified : DateTime.MinValue
+                Created = props["Creation Date"].Value is DateTime created
+                    ? created
+                    : DateTime.MinValue,
+                Modified = props["Last Save Time"].Value is DateTime modified
+                    ? modified
+                    : DateTime.MinValue,
             };
 
             foreach (Excel.Worksheet sheet in workbook.Worksheets)

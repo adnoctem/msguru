@@ -31,13 +31,12 @@ public static class WordCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Word document file."
+            Description = "Path to the Word document file.",
         };
 
         command.Options.Add(inputOption);
 
-        command.SetAction(parseResult =>
-            ShowInfo(parseResult.GetValue(inputOption)!));
+        command.SetAction(parseResult => ShowInfo(parseResult.GetValue(inputOption)!));
 
         return command;
     }
@@ -48,21 +47,20 @@ public static class WordCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Word document file."
+            Description = "Path to the Word document file.",
         };
 
         var outputOption = new Option<string>(name: "--output")
         {
-            Description = "Path to the output text file."
+            Description = "Path to the output text file.",
         };
 
         command.Options.Add(inputOption);
         command.Options.Add(outputOption);
 
         command.SetAction(parseResult =>
-            ExtractText(
-                parseResult.GetValue(inputOption)!,
-                parseResult.GetValue(outputOption)!));
+            ExtractText(parseResult.GetValue(inputOption)!, parseResult.GetValue(outputOption)!)
+        );
 
         return command;
     }
@@ -73,12 +71,12 @@ public static class WordCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Word document file."
+            Description = "Path to the Word document file.",
         };
 
         var outputDirOption = new Option<string>(name: "--output-dir")
         {
-            Description = "Directory to save extracted images."
+            Description = "Directory to save extracted images.",
         };
 
         command.Options.Add(inputOption);
@@ -87,7 +85,9 @@ public static class WordCommand
         command.SetAction(parseResult =>
             ExtractImages(
                 parseResult.GetValue(inputOption)!,
-                parseResult.GetValue(outputDirOption)!));
+                parseResult.GetValue(outputDirOption)!
+            )
+        );
 
         return command;
     }
@@ -98,22 +98,20 @@ public static class WordCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Word document file."
+            Description = "Path to the Word document file.",
         };
 
-        var findOption = new Option<string>(name: "--find")
-        {
-            Description = "Text to find."
-        };
+        var findOption = new Option<string>(name: "--find") { Description = "Text to find." };
 
         var replaceOption = new Option<string>(name: "--replace")
         {
-            Description = "Text to replace with."
+            Description = "Text to replace with.",
         };
 
         var outputOption = new Option<string?>(name: "--output")
         {
-            Description = "Path to save modified document (optional, modifies original if not specified)."
+            Description =
+                "Path to save modified document (optional, modifies original if not specified).",
         };
 
         command.Options.Add(inputOption);
@@ -126,7 +124,9 @@ public static class WordCommand
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(findOption)!,
                 parseResult.GetValue(replaceOption)!,
-                parseResult.GetValue(outputOption)));
+                parseResult.GetValue(outputOption)
+            )
+        );
 
         return command;
     }
@@ -138,12 +138,12 @@ public static class WordCommand
         var inputsOption = new Option<string[]>(name: "--inputs")
         {
             Description = "Paths to the documents to merge (space-separated).",
-            AllowMultipleArgumentsPerToken = true
+            AllowMultipleArgumentsPerToken = true,
         };
 
         var outputOption = new Option<string>(name: "--output")
         {
-            Description = "Path to the output merged document."
+            Description = "Path to the output merged document.",
         };
 
         command.Options.Add(inputsOption);
@@ -152,7 +152,9 @@ public static class WordCommand
         command.SetAction(parseResult =>
             MergeDocuments(
                 parseResult.GetValue(inputsOption)!.ToList(),
-                parseResult.GetValue(outputOption)!));
+                parseResult.GetValue(outputOption)!
+            )
+        );
 
         return command;
     }
@@ -240,7 +242,12 @@ public static class WordCommand
         }
     }
 
-    internal static int SearchAndReplace(string inputPath, string findText, string replaceText, string? outputPath)
+    internal static int SearchAndReplace(
+        string inputPath,
+        string findText,
+        string replaceText,
+        string? outputPath
+    )
     {
         try
         {

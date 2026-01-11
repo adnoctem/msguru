@@ -1,7 +1,7 @@
+using System.Text;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using HtmlAgilityPack;
-using System.Text;
 
 namespace msguru.Converters;
 
@@ -36,7 +36,9 @@ public static class DocxConverter
             html.AppendLine("    <meta charset=\"utf-8\">");
             html.AppendLine("    <title>Document</title>");
             html.AppendLine("    <style>");
-            html.AppendLine("        body { font-family: Calibri, Arial, sans-serif; margin: 40px; }");
+            html.AppendLine(
+                "        body { font-family: Calibri, Arial, sans-serif; margin: 40px; }"
+            );
             html.AppendLine("        p { margin: 0 0 10px 0; }");
             html.AppendLine("        h1, h2, h3, h4, h5, h6 { margin: 20px 0 10px 0; }");
             html.AppendLine("        table { border-collapse: collapse; margin: 10px 0; }");
@@ -64,10 +66,12 @@ public static class DocxConverter
                             "Heading4" => "h4",
                             "Heading5" => "h5",
                             "Heading6" => "h6",
-                            _ => "p"
+                            _ => "p",
                         };
 
-                        html.AppendLine($"    <{tag}>{System.Net.WebUtility.HtmlEncode(text)}</{tag}>");
+                        html.AppendLine(
+                            $"    <{tag}>{System.Net.WebUtility.HtmlEncode(text)}</{tag}>"
+                        );
                         paragraphCount++;
                     }
                 }
@@ -80,7 +84,9 @@ public static class DocxConverter
                         foreach (var cell in row.Elements<TableCell>())
                         {
                             var cellText = cell.InnerText;
-                            html.AppendLine($"            <td>{System.Net.WebUtility.HtmlEncode(cellText)}</td>");
+                            html.AppendLine(
+                                $"            <td>{System.Net.WebUtility.HtmlEncode(cellText)}</td>"
+                            );
                         }
                         html.AppendLine("        </tr>");
                     }
@@ -118,7 +124,10 @@ public static class DocxConverter
             var htmlDoc = new HtmlDocument();
             htmlDoc.Load(htmlPath);
 
-            using var wordDoc = WordprocessingDocument.Create(docxPath, DocumentFormat.OpenXml.WordprocessingDocumentType.Document);
+            using var wordDoc = WordprocessingDocument.Create(
+                docxPath,
+                DocumentFormat.OpenXml.WordprocessingDocumentType.Document
+            );
             var mainPart = wordDoc.AddMainDocumentPart();
             mainPart.Document = new Document(new Body());
             var body = mainPart.Document.Body;

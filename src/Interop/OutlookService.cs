@@ -226,7 +226,10 @@ public class OutlookService : IOfficeService
         return folders;
     }
 
-    private void CollectFoldersRecursive(Outlook.MAPIFolder folder, List<Outlook.MAPIFolder> collection)
+    private void CollectFoldersRecursive(
+        Outlook.MAPIFolder folder,
+        List<Outlook.MAPIFolder> collection
+    )
     {
         collection.Add(folder);
 
@@ -247,7 +250,8 @@ public class OutlookService : IOfficeService
     private string SanitizeFileName(string fileName)
     {
         var invalid = Path.GetInvalidFileNameChars();
-        return string.Join("_", fileName.Split(invalid, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
+        return string.Join("_", fileName.Split(invalid, StringSplitOptions.RemoveEmptyEntries))
+            .TrimEnd('.');
     }
 
     public void Dispose()

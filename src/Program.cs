@@ -1,8 +1,7 @@
 ﻿using System.CommandLine;
+using System.Runtime.InteropServices;
 using msguru.Commands;
 using msguru.Interop;
-using System.Runtime.InteropServices;
-
 
 namespace msguru;
 
@@ -22,9 +21,15 @@ class Program
         else
         {
             // Add placeholder commands with helpful error messages for non-Windows platforms
-            rootCommand.Subcommands.Add(CreateUnsupportedCommand("outlook", "Outlook management commands."));
-            rootCommand.Subcommands.Add(CreateUnsupportedCommand("word", "Word document operations."));
-            rootCommand.Subcommands.Add(CreateUnsupportedCommand("excel", "Excel workbook operations."));
+            rootCommand.Subcommands.Add(
+                CreateUnsupportedCommand("outlook", "Outlook management commands.")
+            );
+            rootCommand.Subcommands.Add(
+                CreateUnsupportedCommand("word", "Word document operations.")
+            );
+            rootCommand.Subcommands.Add(
+                CreateUnsupportedCommand("excel", "Excel workbook operations.")
+            );
         }
 
         // Add cross-platform convert commands
@@ -49,10 +54,14 @@ class Program
         {
             var platform = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "macOS" : "Linux";
             Console.Error.WriteLine($"✗ The '{name}' command is only available on Windows.");
-            Console.Error.WriteLine($"  Microsoft Office COM Interop is not supported on {platform}.");
+            Console.Error.WriteLine(
+                $"  Microsoft Office COM Interop is not supported on {platform}."
+            );
             Console.Error.WriteLine();
             Console.Error.WriteLine($"  Available commands on {platform}:");
-            Console.Error.WriteLine($"    - convert: Document format conversion (DOCX, XLSX, HTML, PDF)");
+            Console.Error.WriteLine(
+                $"    - convert: Document format conversion (DOCX, XLSX, HTML, PDF)"
+            );
             return 1;
         });
 

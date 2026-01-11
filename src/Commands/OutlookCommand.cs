@@ -28,31 +28,34 @@ public static class OutlookCommand
         var daysOption = new Option<int>(name: "--days")
         {
             Description = "Number of days to keep before archiving.",
-            DefaultValueFactory = _ => 30
+            DefaultValueFactory = _ => 30,
         };
 
         var pathOption = new Option<string?>(name: "--path")
         {
-            Description = "Path to the folder to archive. If not specified, all folders are considered.",
+            Description =
+                "Path to the folder to archive. If not specified, all folders are considered.",
         };
 
-        var dryRunOption = new Option<bool>(
-            name: "--dry-run")
+        var dryRunOption = new Option<bool>(name: "--dry-run")
         {
             Description = "Perform a dry run without making any changes.",
-            DefaultValueFactory = _ => false
+            DefaultValueFactory = _ => false,
         };
 
         command.Options.Add(daysOption);
         command.Options.Add(pathOption);
         command.Options.Add(dryRunOption);
 
-        command.SetAction(parseResult => (
-          Archive(
-            parseResult.GetValue(daysOption),
-            parseResult.GetValue(pathOption),
-            parseResult.GetValue(dryRunOption)
-        )));
+        command.SetAction(parseResult =>
+            (
+                Archive(
+                    parseResult.GetValue(daysOption),
+                    parseResult.GetValue(pathOption),
+                    parseResult.GetValue(dryRunOption)
+                )
+            )
+        );
 
         return command;
     }
@@ -73,17 +76,17 @@ public static class OutlookCommand
         var folderOption = new Option<string>(name: "--folder")
         {
             Description = "Folder path to export from.",
-            DefaultValueFactory = _ => "Inbox"
+            DefaultValueFactory = _ => "Inbox",
         };
 
         var outputOption = new Option<string>(name: "--output")
         {
-            Description = "Output directory for exported messages."
+            Description = "Output directory for exported messages.",
         };
 
         var maxOption = new Option<int?>(name: "--max")
         {
-            Description = "Maximum number of messages to export (optional)."
+            Description = "Maximum number of messages to export (optional).",
         };
 
         command.Options.Add(folderOption);
@@ -91,10 +94,12 @@ public static class OutlookCommand
         command.Options.Add(maxOption);
 
         command.SetAction(parseResult =>
-          ExportMessages(
-            parseResult.GetValue(folderOption)!,
-            parseResult.GetValue(outputOption)!,
-            parseResult.GetValue(maxOption)));
+            ExportMessages(
+                parseResult.GetValue(folderOption)!,
+                parseResult.GetValue(outputOption)!,
+                parseResult.GetValue(maxOption)
+            )
+        );
 
         return command;
     }

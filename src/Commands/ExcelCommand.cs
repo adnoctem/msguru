@@ -31,13 +31,12 @@ public static class ExcelCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Excel workbook file."
+            Description = "Path to the Excel workbook file.",
         };
 
         command.Options.Add(inputOption);
 
-        command.SetAction(parseResult =>
-            ShowInfo(parseResult.GetValue(inputOption)!));
+        command.SetAction(parseResult => ShowInfo(parseResult.GetValue(inputOption)!));
 
         return command;
     }
@@ -48,13 +47,12 @@ public static class ExcelCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Excel workbook file."
+            Description = "Path to the Excel workbook file.",
         };
 
         command.Options.Add(inputOption);
 
-        command.SetAction(parseResult =>
-            ListSheets(parseResult.GetValue(inputOption)!));
+        command.SetAction(parseResult => ListSheets(parseResult.GetValue(inputOption)!));
 
         return command;
     }
@@ -65,17 +63,17 @@ public static class ExcelCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Excel workbook file."
+            Description = "Path to the Excel workbook file.",
         };
 
         var sheetOption = new Option<string>(name: "--sheet")
         {
-            Description = "Name of the sheet to extract."
+            Description = "Name of the sheet to extract.",
         };
 
         var outputOption = new Option<string>(name: "--output")
         {
-            Description = "Path to the output workbook file."
+            Description = "Path to the output workbook file.",
         };
 
         command.Options.Add(inputOption);
@@ -86,7 +84,9 @@ public static class ExcelCommand
             ExtractSheet(
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(sheetOption)!,
-                parseResult.GetValue(outputOption)!));
+                parseResult.GetValue(outputOption)!
+            )
+        );
 
         return command;
     }
@@ -97,17 +97,17 @@ public static class ExcelCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Excel workbook file."
+            Description = "Path to the Excel workbook file.",
         };
 
         var sheetOption = new Option<string?>(name: "--sheet")
         {
-            Description = "Name of the sheet to convert (optional, defaults to first sheet)."
+            Description = "Name of the sheet to convert (optional, defaults to first sheet).",
         };
 
         var outputOption = new Option<string>(name: "--output")
         {
-            Description = "Path to the output CSV file."
+            Description = "Path to the output CSV file.",
         };
 
         command.Options.Add(inputOption);
@@ -118,7 +118,9 @@ public static class ExcelCommand
             ConvertToCsv(
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(outputOption)!,
-                parseResult.GetValue(sheetOption)));
+                parseResult.GetValue(sheetOption)
+            )
+        );
 
         return command;
     }
@@ -129,13 +131,12 @@ public static class ExcelCommand
 
         var inputOption = new Option<string>(name: "--input")
         {
-            Description = "Path to the Excel workbook file."
+            Description = "Path to the Excel workbook file.",
         };
 
         command.Options.Add(inputOption);
 
-        command.SetAction(parseResult =>
-            RefreshConnections(parseResult.GetValue(inputOption)!));
+        command.SetAction(parseResult => RefreshConnections(parseResult.GetValue(inputOption)!));
 
         return command;
     }

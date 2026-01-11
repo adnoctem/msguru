@@ -36,7 +36,7 @@ public class WordService : IOfficeService
                 _wordApp = new Word.Application
                 {
                     Visible = false,
-                    DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
+                    DisplayAlerts = Word.WdAlertLevel.wdAlertsNone,
                 };
             }
         }
@@ -91,12 +91,16 @@ public class WordService : IOfficeService
                 Keywords = props["Keywords"].Value?.ToString() ?? string.Empty,
                 Comments = props["Comments"].Value?.ToString() ?? string.Empty,
                 LastSavedBy = props["Last Author"].Value?.ToString() ?? string.Empty,
-                Created = props["Creation Date"].Value is DateTime created ? created : DateTime.MinValue,
-                Modified = props["Last Save Time"].Value is DateTime modified ? modified : DateTime.MinValue,
+                Created = props["Creation Date"].Value is DateTime created
+                    ? created
+                    : DateTime.MinValue,
+                Modified = props["Last Save Time"].Value is DateTime modified
+                    ? modified
+                    : DateTime.MinValue,
                 PageCount = doc.ComputeStatistics(Word.WdStatistic.wdStatisticPages),
                 WordCount = doc.ComputeStatistics(Word.WdStatistic.wdStatisticWords),
                 CharacterCount = doc.ComputeStatistics(Word.WdStatistic.wdStatisticCharacters),
-                ParagraphCount = doc.ComputeStatistics(Word.WdStatistic.wdStatisticParagraphs)
+                ParagraphCount = doc.ComputeStatistics(Word.WdStatistic.wdStatisticParagraphs),
             };
 
             return info;
@@ -149,7 +153,12 @@ public class WordService : IOfficeService
     /// <param name="outputPath">Optional path to save the modified document. If null, saves to the original path.</param>
     /// <returns>The number of replacements made.</returns>
     /// <exception cref="FileNotFoundException">Thrown when the document file is not found.</exception>
-    public int SearchAndReplace(string path, string findText, string replaceText, string? outputPath = null)
+    public int SearchAndReplace(
+        string path,
+        string findText,
+        string replaceText,
+        string? outputPath = null
+    )
     {
         if (!File.Exists(path))
             throw new FileNotFoundException($"Document not found: {path}");
@@ -172,7 +181,8 @@ public class WordService : IOfficeService
             findObject.Execute(
                 FindText: findText,
                 ReplaceWith: replaceText,
-                Replace: Word.WdReplace.wdReplaceAll);
+                Replace: Word.WdReplace.wdReplaceAll
+            );
 
             // Count how many replacements were made by searching again
             findObject.Execute(FindText: replaceText);
@@ -231,11 +241,16 @@ public class WordService : IOfficeService
             var imageIndex = 1;
             foreach (Word.InlineShape shape in doc.InlineShapes)
             {
-                if (shape.Type == Word.WdInlineShapeType.wdInlineShapePicture ||
-                    shape.Type == Word.WdInlineShapeType.wdInlineShapeLinkedPicture)
+                if (
+                    shape.Type == Word.WdInlineShapeType.wdInlineShapePicture
+                    || shape.Type == Word.WdInlineShapeType.wdInlineShapeLinkedPicture
+                )
                 {
                     var extension = GetImageExtension(shape);
-                    var outputPath = System.IO.Path.Combine(outputDir, $"image_{imageIndex:D3}{extension}");
+                    var outputPath = System.IO.Path.Combine(
+                        outputDir,
+                        $"image_{imageIndex:D3}{extension}"
+                    );
 
                     // Copy image data
                     shape.Range.Copy();

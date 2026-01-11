@@ -1,7 +1,7 @@
+using System.Text;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using HtmlAgilityPack;
-using System.Text;
 
 namespace msguru.Converters;
 
@@ -36,9 +36,13 @@ public static class XlsxConverter
             html.AppendLine("    <meta charset=\"utf-8\">");
             html.AppendLine("    <title>Spreadsheet</title>");
             html.AppendLine("    <style>");
-            html.AppendLine("        body { font-family: Calibri, Arial, sans-serif; margin: 40px; }");
+            html.AppendLine(
+                "        body { font-family: Calibri, Arial, sans-serif; margin: 40px; }"
+            );
             html.AppendLine("        table { border-collapse: collapse; margin: 20px 0; }");
-            html.AppendLine("        td, th { border: 1px solid #ccc; padding: 8px; text-align: left; }");
+            html.AppendLine(
+                "        td, th { border: 1px solid #ccc; padding: 8px; text-align: left; }"
+            );
             html.AppendLine("        th { background-color: #f0f0f0; font-weight: bold; }");
             html.AppendLine("        h2 { margin: 30px 0 10px 0; }");
             html.AppendLine("    </style>");
@@ -56,7 +60,9 @@ public static class XlsxConverter
                 if (sheetData == null)
                     continue;
 
-                html.AppendLine($"    <h2>{System.Net.WebUtility.HtmlEncode(sheet.Name?.Value ?? "Sheet")}</h2>");
+                html.AppendLine(
+                    $"    <h2>{System.Net.WebUtility.HtmlEncode(sheet.Name?.Value ?? "Sheet")}</h2>"
+                );
                 html.AppendLine("    <table>");
 
                 var rows = sheetData.Elements<Row>().ToList();
@@ -70,7 +76,9 @@ public static class XlsxConverter
                     {
                         var cellValue = GetCellValue(cell, workbookPart);
                         var tag = firstRow ? "th" : "td";
-                        html.AppendLine($"            <{tag}>{System.Net.WebUtility.HtmlEncode(cellValue)}</{tag}>");
+                        html.AppendLine(
+                            $"            <{tag}>{System.Net.WebUtility.HtmlEncode(cellValue)}</{tag}>"
+                        );
                     }
 
                     html.AppendLine("        </tr>");
@@ -110,7 +118,10 @@ public static class XlsxConverter
             var htmlDoc = new HtmlDocument();
             htmlDoc.Load(htmlPath);
 
-            using var spreadsheet = SpreadsheetDocument.Create(xlsxPath, DocumentFormat.OpenXml.SpreadsheetDocumentType.Workbook);
+            using var spreadsheet = SpreadsheetDocument.Create(
+                xlsxPath,
+                DocumentFormat.OpenXml.SpreadsheetDocumentType.Workbook
+            );
             var workbookPart = spreadsheet.AddWorkbookPart();
             workbookPart.Workbook = new Workbook();
 
@@ -132,7 +143,7 @@ public static class XlsxConverter
                 {
                     Id = workbookPart.GetIdOfPart(worksheetPart),
                     SheetId = sheetId,
-                    Name = $"Sheet{sheetId}"
+                    Name = $"Sheet{sheetId}",
                 };
                 sheets.Append(sheet);
 
@@ -149,11 +160,13 @@ public static class XlsxConverter
                         {
                             foreach (var htmlCell in cells)
                             {
-                                var cellText = System.Net.WebUtility.HtmlDecode(htmlCell.InnerText).Trim();
+                                var cellText = System
+                                    .Net.WebUtility.HtmlDecode(htmlCell.InnerText)
+                                    .Trim();
                                 var cell = new Cell
                                 {
                                     CellValue = new CellValue(cellText),
-                                    DataType = CellValues.String
+                                    DataType = CellValues.String,
                                 };
                                 row.Append(cell);
                             }

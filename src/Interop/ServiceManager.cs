@@ -16,7 +16,8 @@ public static class ServiceManager
     /// </summary>
     /// <typeparam name="T">The service type to retrieve.</typeparam>
     /// <returns>The singleton instance of the service.</returns>
-    public static T GetService<T>() where T : IOfficeService, new()
+    public static T GetService<T>()
+        where T : IOfficeService, new()
     {
         lock (_lock)
         {
@@ -34,7 +35,8 @@ public static class ServiceManager
     /// <summary>
     /// Checks if a service instance exists for the specified type.
     /// </summary>
-    public static bool HasService<T>() where T : IOfficeService
+    public static bool HasService<T>()
+        where T : IOfficeService
     {
         lock (_lock)
         {
@@ -45,7 +47,8 @@ public static class ServiceManager
     /// <summary>
     /// Disposes and removes a specific service from the manager.
     /// </summary>
-    public static void DisposeService<T>() where T : IOfficeService
+    public static void DisposeService<T>()
+        where T : IOfficeService
     {
         lock (_lock)
         {

@@ -51,7 +51,8 @@ public static class ConvertCommand
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(outputOption)!,
                 DocxConverter.ToHtml
-            ));
+            )
+        );
 
         return command;
     }
@@ -78,7 +79,8 @@ public static class ConvertCommand
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(outputOption)!,
                 DocxConverter.FromHtml
-            ));
+            )
+        );
 
         return command;
     }
@@ -105,7 +107,8 @@ public static class ConvertCommand
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(outputOption)!,
                 XlsxConverter.ToHtml
-            ));
+            )
+        );
 
         return command;
     }
@@ -132,7 +135,8 @@ public static class ConvertCommand
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(outputOption)!,
                 XlsxConverter.FromHtml
-            ));
+            )
+        );
 
         return command;
     }
@@ -166,7 +170,8 @@ public static class ConvertCommand
                 parseResult.GetValue(outputOption)!,
                 parseResult.GetValue(chromePathOption),
                 PdfConverter.DocxToPdfAsync
-            ));
+            )
+        );
 
         return command;
     }
@@ -200,7 +205,8 @@ public static class ConvertCommand
                 parseResult.GetValue(outputOption)!,
                 parseResult.GetValue(chromePathOption),
                 PdfConverter.XlsxToPdfAsync
-            ));
+            )
+        );
 
         return command;
     }
@@ -234,7 +240,8 @@ public static class ConvertCommand
                 parseResult.GetValue(outputOption)!,
                 parseResult.GetValue(chromePathOption),
                 PdfConverter.HtmlToPdfAsync
-            ));
+            )
+        );
 
         return command;
     }
@@ -261,7 +268,8 @@ public static class ConvertCommand
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(outputOption)!,
                 HtmlConverter.FromPlainText
-            ));
+            )
+        );
 
         return command;
     }
@@ -288,7 +296,8 @@ public static class ConvertCommand
                 parseResult.GetValue(inputOption)!,
                 parseResult.GetValue(outputOption)!,
                 HtmlConverter.ToPlainText
-            ));
+            )
+        );
 
         return command;
     }
@@ -296,7 +305,8 @@ public static class ConvertCommand
     internal static int ExecuteConversion(
         string inputPath,
         string outputPath,
-        Func<string, string, ConversionResult> conversionFunc)
+        Func<string, string, ConversionResult> conversionFunc
+    )
     {
         Console.WriteLine($"Converting: {inputPath}");
         Console.WriteLine($"Output: {outputPath}");
@@ -327,7 +337,8 @@ public static class ConvertCommand
         string inputPath,
         string outputPath,
         string? chromePath,
-        Func<string, string, string?, Task<ConversionResult>> conversionFunc)
+        Func<string, string, string?, Task<ConversionResult>> conversionFunc
+    )
     {
         Console.WriteLine($"Converting: {inputPath}");
         Console.WriteLine($"Output: {outputPath}");

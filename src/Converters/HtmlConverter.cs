@@ -1,5 +1,5 @@
-using HtmlAgilityPack;
 using System.Text;
+using HtmlAgilityPack;
 
 namespace msguru.Converters;
 
@@ -125,7 +125,10 @@ public static class HtmlConverter
                 return ConversionResult.FailureResult($"Input file not found: {textPath}");
 
             var text = File.ReadAllText(textPath);
-            var paragraphs = text.Split(new[] { "\r\n\r\n", "\n\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var paragraphs = text.Split(
+                new[] { "\r\n\r\n", "\n\n" },
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             var html = new StringBuilder();
             html.AppendLine("<!DOCTYPE html>");
@@ -134,7 +137,9 @@ public static class HtmlConverter
             html.AppendLine("    <meta charset=\"utf-8\">");
             html.AppendLine("    <title>Document</title>");
             html.AppendLine("    <style>");
-            html.AppendLine("        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }");
+            html.AppendLine(
+                "        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }"
+            );
             html.AppendLine("        p { margin: 0 0 15px 0; }");
             html.AppendLine("    </style>");
             html.AppendLine("</head>");
@@ -165,8 +170,10 @@ public static class HtmlConverter
     {
         if (node.NodeType == HtmlNodeType.Element)
         {
-            var attributesToRemove = node.Attributes
-                .Where(attr => attr.Name.StartsWith("on", StringComparison.OrdinalIgnoreCase))
+            var attributesToRemove = node
+                .Attributes.Where(attr =>
+                    attr.Name.StartsWith("on", StringComparison.OrdinalIgnoreCase)
+                )
                 .ToList();
 
             foreach (var attr in attributesToRemove)

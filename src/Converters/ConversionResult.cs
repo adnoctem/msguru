@@ -42,7 +42,7 @@ public class ConversionResult
         {
             Success = true,
             OutputPath = outputPath,
-            ItemsProcessed = itemsProcessed
+            ItemsProcessed = itemsProcessed,
         };
     }
 
@@ -53,10 +53,6 @@ public class ConversionResult
     /// <returns>A ConversionResult indicating failure.</returns>
     public static ConversionResult FailureResult(string errorMessage)
     {
-        return new ConversionResult
-        {
-            Success = false,
-            ErrorMessage = errorMessage
-        };
+        return new ConversionResult { Success = false, ErrorMessage = errorMessage };
     }
 }
